@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">Wallet Prototype</string>
+    <string name="app_logo">Company Logo</string>
+
+    <!-- button -->
+    <string name="btn_signup">Create Account</string>
+    <string name="btn_signin">Sign In</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="signin_label">Sign In</string>
+
+    <string name="username_placeholder">Username</string>
+    <string name="password_placeholder">Password</string>
+    <string name="title_activity_dashboard">DashboardActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- Buy Information -->
+    <string name="buyFragmentLabelTxt">Buy Currency</string>
+    <string name="sendLabelTxt">Send Money (TK)</string>
+    <string name="receiveLabelTxt">Receive Money </string>
+    <string name="receiveAmountHint">USD Amount </string>
+    <string name="sendAmountHint">BDT Amount </string>
+    <string name="placeholder">Type Here </string>
+
+    <!-- Button Information -->
+    <string name="nextButtonTxt">Next</string>
+    <string name="btn_back">Back</string>
+    <string name="submitBtn">Submit</string>
+
+    <!-- Gateway Information -->
+    <string-array name="bdGateway">
+        <item>BRAC Bank</item>
+        <item>bKash</item>
+        <item>DBBL Bank</item>
+        <item>ROCKET</item>
+    </string-array>
+
+    <string-array name="foreignGateway">
+        <item>Payza</item>
+        <item>Skrill</item>
+        <item>Perfect Money</item>
+        <item>Bitcoin</item>
+        <item>Neteller</item>
+        <item>Payeer</item>
+        <item>Payoneer</item>
+        <item>Web Money</item>
+    </string-array>
+
+    <!-- auth information -->
+    <string name="username">admin</string>
+    <string name="password">12345</string>
+
+</resources>
