@@ -7,18 +7,24 @@
     <string name="btn_signin">Sign In</string>
 
     <!-- TODO: Remove or change this placeholder text -->
+    <!-- Label Information -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <string name="signin_label">Sign In</string>
-
+    <string name="signup_label">Sign Up</string>
     <string name="username_placeholder">Username</string>
     <string name="password_placeholder">Password</string>
     <string name="title_activity_dashboard">DashboardActivity</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
+    <string name="greetingTxt">Hi User</string>
+    <string name="welcomeTxt">Welcome to your Dashboard</string>
+    <string name="attentionTitle">Attention Title</string>
+    <string name="attentionDescription">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab consequuntur cumque eligendi exercitationem id ipsum itaque iure iusto laudantium nemo neque, omnis perferendis praesentium quibusdam, quo rem suscipit tempore.</string>
+    <string name="referralLink">http://freelanceitlab.com</string>
+    <string name="referredQuantityLabel">Referred Quantity</string>
+    <string name="referredQuantity">0</string>
+    <string name="regLabel">Registration Form</string>
 
     <!-- Buy Information -->
     <string name="buyFragmentLabelTxt">Buy Currency</string>
@@ -52,8 +58,248 @@
         <item>Web Money</item>
     </string-array>
 
-    <!-- auth information -->
-    <string name="username">admin</string>
-    <string name="password">12345</string>
+    <!-- country information -->
+    <string-array name="country_arrays">
+        <item> Select Country </item>
+        <item> AFGHANISTAN </item>
+        <item> ALBANIA </item>
+        <item> ALGERIA </item>
+        <item> AMERICAN SAMOA </item>
+        <item> ANDORRA </item>
+        <item> ANGOLA </item>
+        <item> ANGUILLA </item>
+        <item> ANTARCTICA </item>
+        <item> ANTIGUA AND BARBUDA </item>
+        <item> ARGENTINA </item>
+        <item> ARMENIA </item>
+        <item> ARUBA </item>
+        <item> AUSTRALIA </item>
+        <item> AUSTRIA </item>
+        <item> AZERBAIJAN </item>
+        <item> BAHAMAS </item>
+        <item> BAHRAIN </item>
+        <item> BANGLADESH </item>
+        <item> BARBADOS </item>
+        <item> BELARUS </item>
+        <item> BELGIUM </item>
+        <item> BELIZE </item>
+        <item> BENIN </item>
+        <item> BERMUDA </item>
+        <item> BHUTAN </item>
+        <item> BOLIVIA </item>
+        <item> BOSNIA AND HERZEGOVINA </item>
+        <item> BOTSWANA </item>
+        <item> BOUVET ISLAND </item>
+        <item> BRAZIL </item>
+        <item> BRITISH INDIAN OCEAN TERRITORY </item>
+        <item> BRUNEI DARUSSALAM </item>
+        <item> BULGARIA </item>
+        <item> BURKINA FASO </item>
+        <item> BURUNDI </item>
+        <item> CAMBODIA </item>
+        <item> CAMEROON </item>
+        <item> CANADA </item>
+        <item> CAPE VERDE </item>
+        <item> CAYMAN ISLANDS </item>
+        <item> CENTRAL AFRICAN REPUBLIC </item>
+        <item> CHAD </item>
+        <item> CHILE </item>
+        <item> CHINA </item>
+        <item> CHRISTMAS ISLAND </item>
+        <item> COCOS (KEELING) ISLANDS </item>
+        <item> COLOMBIA </item>
+        <item> COMOROS </item>
+        <item> CONGO </item>
+        <item> CONGO, THE DEMOCRATIC REPUBLIC OF THE </item>
+        <item> COOK ISLANDS </item>
+        <item> COSTA RICA </item>
+        <item> COTE D\'IVOIRE </item>
+        <item> CROATIA </item>
+        <item> CUBA </item>
+        <item> CYPRUS </item>
+        <item> CZECH REPUBLIC </item>
+        <item> DENMARK </item>
+        <item> DJIBOUTI </item>
+        <item> DOMINICA </item>
+        <item> DOMINICAN REPUBLIC </item>
+        <item> ECUADOR </item>
+        <item> EGYPT </item>
+        <item> EL SALVADOR </item>
+        <item> EQUATORIAL GUINEA </item>
+        <item> ERITREA </item>
+        <item> ESTONIA </item>
+        <item> ETHIOPIA </item>
+        <item> FALKLAND ISLANDS (MALVINAS) </item>
+        <item> FAROE ISLANDS </item>
+        <item> FIJI </item>
+        <item> FINLAND </item>
+        <item> FRANCE </item>
+        <item> FRENCH GUIANA </item>
+        <item> FRENCH POLYNESIA </item>
+        <item> FRENCH SOUTHERN TERRITORIES </item>
+        <item> GABON </item>
+        <item> GAMBIA </item>
+        <item> GEORGIA </item>
+        <item> GERMANY </item>
+        <item> GHANA </item>
+        <item> GIBRALTAR </item>
+        <item> GREECE </item>
+        <item> GREENLAND </item>
+        <item> GRENADA </item>
+        <item> GUADELOUPE </item>
+        <item> GUAM </item>
+        <item> GUATEMALA </item>
+        <item> GUINEA </item>
+        <item> GUINEA-BISSAU </item>
+        <item> GUYANA </item>
+        <item> HAITI </item>
+        <item> HEARD ISLAND AND MCDONALD ISLANDS </item>
+        <item> HOLY SEE (VATICAN CITY STATE) </item>
+        <item> HONDURAS </item>
+        <item> HONG KONG </item>
+        <item> HUNGARY </item>
+        <item> ICELAND </item>
+        <item> INDIA </item>
+        <item> INDONESIA </item>
+        <item> IRAN, ISLAMIC REPUBLIC OF </item>
+        <item> IRAQ </item>
+        <item> IRELAND </item>
+        <item> ISRAEL </item>
+        <item> ITALY </item>
+        <item> JAMAICA </item>
+        <item> JAPAN </item>
+        <item> JORDAN </item>
+        <item> KAZAKHSTAN </item>
+        <item> KENYA </item>
+        <item> KIRIBATI </item>
+        <item> KOREA, DEMOCRATIC PEOPLE\'S REPUBLIC OF </item>
+        <item> KOREA, REPUBLIC OF </item>
+        <item> KUWAIT </item>
+        <item> KYRGYZSTAN </item>
+        <item> LAO PEOPLE\'S DEMOCRATIC REPUBLIC </item>
+        <item> LATVIA </item>
+        <item> LEBANON </item>
+        <item> LESOTHO </item>
+        <item> LIBERIA </item>
+        <item> LIBYAN ARAB JAMAHIRIYA </item>
+        <item> LIECHTENSTEIN </item>
+        <item> LITHUANIA </item>
+        <item> LUXEMBOURG </item>
+        <item> MACAO </item>
+        <item> MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF </item>
+        <item> MADAGASCAR </item>
+        <item> MALAWI </item>
+        <item> MALAYSIA </item>
+        <item> MALDIVES </item>
+        <item> MALI </item>
+        <item> MALTA </item>
+        <item> MARSHALL ISLANDS </item>
+        <item> MARTINIQUE </item>
+        <item> MAURITANIA </item>
+        <item> MAURITIUS </item>
+        <item> MAYOTTE </item>
+        <item> MEXICO </item>
+        <item> MICRONESIA, FEDERATED STATES OF </item>
+        <item> MOLDOVA, REPUBLIC OF </item>
+        <item> MONACO </item>
+        <item> MONGOLIA </item>
+        <item> MONTSERRAT </item>
+        <item> MOROCCO </item>
+        <item> MOZAMBIQUE </item>
+        <item> MYANMAR </item>
+        <item> NAMIBIA </item>
+        <item> NAURU </item>
+        <item> NEPAL </item>
+        <item> NETHERLANDS </item>
+        <item> NETHERLANDS ANTILLES </item>
+        <item> NEW CALEDONIA </item>
+        <item> NEW ZEALAND </item>
+        <item> NICARAGUA </item>
+        <item> NIGER </item>
+        <item> NIGERIA </item>
+        <item> NIUE </item>
+        <item> NORFOLK ISLAND </item>
+        <item> NORTHERN MARIANA ISLANDS </item>
+        <item> NORWAY </item>
+        <item> OMAN </item>
+        <item> PAKISTAN </item>
+        <item> PALAU </item>
+        <item> PALESTINIAN TERRITORY, OCCUPIED </item>
+        <item> PANAMA </item>
+        <item> PAPUA NEW GUINEA </item>
+        <item> PARAGUAY </item>
+        <item> PERU </item>
+        <item> PHILIPPINES </item>
+        <item> PITCAIRN </item>
+        <item> POLAND </item>
+        <item> PORTUGAL </item>
+        <item> PUERTO RICO </item>
+        <item> QATAR </item>
+        <item> REUNION </item>
+        <item> ROMANIA </item>
+        <item> RUSSIAN FEDERATION </item>
+        <item> RWANDA </item>
+        <item> SAINT HELENA </item>
+        <item> SAINT KITTS AND NEVIS </item>
+        <item> SAINT LUCIA </item>
+        <item> SAINT PIERRE AND MIQUELON </item>
+        <item> SAINT VINCENT AND THE GRENADINES </item>
+        <item> SAMOA </item>
+        <item> SAN MARINO </item>
+        <item> SAO TOME AND PRINCIPE </item>
+        <item> SAUDI ARABIA </item>
+        <item> SENEGAL </item>
+        <item> SERBIA AND MONTENEGRO </item>
+        <item> SEYCHELLES </item>
+        <item> SIERRA LEONE </item>
+        <item> SINGAPORE </item>
+        <item> SLOVAKIA </item>
+        <item> SLOVENIA </item>
+        <item> SOLOMON ISLANDS </item>
+        <item> SOMALIA </item>
+        <item> SOUTH AFRICA </item>
+        <item> SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS </item>
+        <item> SPAIN </item>
+        <item> SRI LANKA </item>
+        <item> SUDAN </item>
+        <item> SURINAME </item>
+        <item> SVALBARD AND JAN MAYEN </item>
+        <item> SWAZILAND </item>
+        <item> SWEDEN </item>
+        <item> SWITZERLAND </item>
+        <item> SYRIAN ARAB REPUBLIC </item>
+        <item> TAIWAN, PROVINCE OF CHINA </item>
+        <item> TAJIKISTAN </item>
+        <item> TANZANIA, UNITED REPUBLIC OF </item>
+        <item> THAILAND </item>
+        <item> TIMOR-LESTE </item>
+        <item> TOGO </item>
+        <item> TOKELAU </item>
+        <item> TONGA </item>
+        <item> TRINIDAD AND TOBAGO </item>
+        <item> TUNISIA </item>
+        <item> TURKEY </item>
+        <item> TURKMENISTAN </item>
+        <item> TURKS AND CAICOS ISLANDS </item>
+        <item> TUVALU </item>
+        <item> UGANDA </item>
+        <item> UKRAINE </item>
+        <item> UNITED ARAB EMIRATES </item>
+        <item> UNITED KINGDOM </item>
+        <item> UNITED STATES </item>
+        <item> UNITED STATES MINOR OUTLYING ISLANDS </item>
+        <item> URUGUAY </item>
+        <item> UZBEKISTAN </item>
+        <item> VANUATU </item>
+        <item> VENEZUELA </item>
+        <item> VIET NAM </item>
+        <item> VIRGIN ISLANDS, BRITISH </item>
+        <item> VIRGIN ISLANDS, U.S. </item>
+        <item> WALLIS AND FUTUNA </item>
+        <item> WESTERN SAHARA </item>
+        <item> YEMEN </item>
+        <item> ZAMBIA </item>
+        <item> ZIMBABWE </item>
+    </string-array>
 
 </resources>

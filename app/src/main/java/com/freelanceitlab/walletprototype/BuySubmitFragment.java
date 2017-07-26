@@ -18,6 +18,9 @@ public class BuySubmitFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_buy_submit, container, false);
 
+        // change action bar text
+        getActivity().setTitle("Buy Currency");
+
         // set description
         TextView buyDescriptionId = (TextView) view.findViewById(R.id.buyDescriptionId);
         buyDescriptionId.setText("Dynamic Label");

@@ -23,8 +23,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginBottom="0dp"
         app:layout_constraintBottom_toTopOf="@+id/username"
-        app:layout_constraintVertical_bias="0.116"
-        app:layout_constraintHorizontal_bias="0.503" />
+        app:layout_constraintVertical_bias="0.123" />
 
     <EditText
         android:id="@+id/username"

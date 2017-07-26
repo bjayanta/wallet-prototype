@@ -3,6 +3,7 @@ package com.freelanceitlab.walletprototype;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -129,6 +130,14 @@ public class SigninFragment extends Fragment {
                     String description = object.getString("description");
 
                     if (permission == 1 && error == 0) {
+                        // set the user data
+                        String data = object.getString("userinfo");
+                        setUserdata(data);
+
+                        // set notice data
+                        String notice = object.getString("notice");
+                        setNoticedata(notice);
+
                         // run dashboard activity
                         Intent dashboardIntent = new Intent(getContext(), DashboardActivity.class);
                         startActivity(dashboardIntent);
@@ -166,5 +175,20 @@ public class SigninFragment extends Fragment {
         }
     }
 
+    private void setUserdata(String data) {
+        SharedPreferences sharedData = getActivity().getSharedPreferences("Userdata", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedData.edit();
+
+        editor.putString("userdetails", data);
+        editor.apply();
+    }
+
+    private void setNoticedata(String data) {
+        SharedPreferences sharedData = getActivity().getSharedPreferences("Noticedata", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedData.edit();
+
+        editor.putString("noticedetails", data);
+        editor.apply();
+    }
 
 }

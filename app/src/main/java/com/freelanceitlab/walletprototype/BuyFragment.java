@@ -1,9 +1,12 @@
 package com.freelanceitlab.walletprototype;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +29,8 @@ public class BuyFragment extends Fragment implements AdapterView.OnItemSelectedL
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_buy, container, false);
 
+        // change action bar text
+        getActivity().setTitle("Buy Currency");
 
         // target the send spinner
         Spinner sendGatewayId = (Spinner) view.findViewById(R.id.sendGatewayId);
@@ -68,6 +73,9 @@ public class BuyFragment extends Fragment implements AdapterView.OnItemSelectedL
         sendGatewayId.setOnItemSelectedListener(this);
         receiveGatewayId.setOnItemSelectedListener(this);
 
+        // log the userdata
+        Log.v("USERDATA", setUserdata());
+
         return view;
     }
 
@@ -80,5 +88,12 @@ public class BuyFragment extends Fragment implements AdapterView.OnItemSelectedL
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    private String setUserdata() {
+        SharedPreferences appdata = getActivity().getSharedPreferences("Appdata", Context.MODE_PRIVATE);
+        String data = appdata.getString("userdata", "");
+
+        return data;
     }
 }
