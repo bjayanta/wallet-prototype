@@ -60,7 +60,7 @@
 
     <!-- country information -->
     <string-array name="country_arrays">
-        <item> Select Country </item>
+        <item>  </item>
         <item> AFGHANISTAN </item>
         <item> ALBANIA </item>
         <item> ALGERIA </item>
