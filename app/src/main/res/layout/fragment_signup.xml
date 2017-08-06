@@ -10,7 +10,7 @@
         android:id="@+id/regID"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="2dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
@@ -18,10 +18,20 @@
         android:textSize="24dp"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/confirmation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:textColor="@color/confirmationColor"
+        android:layout_below="@+id/regID" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/regID">
+        android:layout_below="@+id/confirmation">
 
         <RelativeLayout
             android:id="@+id/newlayout_id"

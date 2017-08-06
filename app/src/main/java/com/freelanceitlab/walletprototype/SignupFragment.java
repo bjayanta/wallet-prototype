@@ -1,7 +1,5 @@
 package com.freelanceitlab.walletprototype;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -48,7 +47,7 @@ public class SignupFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_signup, container, false);
+        final View view = inflater.inflate(R.layout.fragment_signup, container, false);
 
         Button backBtn = (Button) view.findViewById(R.id.back);
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +96,7 @@ public class SignupFragment extends Fragment {
                 validation.input("email", "Email", "empty|email|unique.registration.email");
                 validation.input("password", "Password", "empty|alphanumeric");
                 validation.input("referral_email", "Referral Email", "empty|email");
-                validation.input("country", "Country", "empty");
+                validation.input("country", "Country", "empty|list");
 
                 if(validation.run() == false) {
                     try {
@@ -128,7 +127,20 @@ public class SignupFragment extends Fragment {
                     }
                 } else {
                     String response = sendDataToServer();
-                    Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
+
+                    try {
+                        JSONObject responseObject = new JSONObject(response);
+                        TextView confirmation = (TextView) view.findViewById(R.id.confirmation);
+
+                        if(responseObject != null) {
+                            if(responseObject.getString("status").equals("0")) {
+                                confirmation.setText(responseObject.getString("msg"));
+                            }
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
@@ -164,9 +176,11 @@ public class SignupFragment extends Fragment {
 
     private String getServerResponse() {
         String key = "db5d8d6959ccb6288afffa1b018631f5";
-        String output = "";
+        String output = null;
+        String response = null;
 
         URL url = null;
+
         try {
             url = new URL("http://dbsewallet.com/api/permission/signup?key=" + key);
             String urlParameters = "details="  + URLEncoder.encode(dataset.toString(), "UTF-8");
@@ -197,6 +211,8 @@ public class SignupFragment extends Fragment {
             br.close();
 
             output += System.getProperty("line.separator") + responseOutput.toString();
+            response = responseOutput.toString();
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
@@ -205,15 +221,9 @@ public class SignupFragment extends Fragment {
             e.printStackTrace();
         }
 
-        Log.v("response", output);
-        return output;
-    }
-
-    private String getUserdata() {
-        SharedPreferences sharedData = getActivity().getSharedPreferences("Userdata", Context.MODE_PRIVATE);
-        String data = sharedData.getString("userdetails", "");
-
-        return data;
+        // Log.v("response", output);
+        // return output;
+        return response;
     }
 
 }

@@ -153,6 +153,14 @@ public class Validation {
                     }
 
                     break;
+                case "list":
+                    if(input.equals("Select")) {
+                        description += " Select any one from the list bellow!";
+
+                        // set the errors
+                        setError(field, description);
+                    }
+                    break;
                 default:
                     // do anything else
 

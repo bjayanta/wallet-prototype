@@ -60,6 +60,7 @@ public class DashboardActivity extends AppCompatActivity
         return true;
     }
 
+    /**
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -73,7 +74,7 @@ public class DashboardActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    } */
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override

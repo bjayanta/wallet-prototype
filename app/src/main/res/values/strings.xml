@@ -60,7 +60,7 @@
 
     <!-- country information -->
     <string-array name="country_arrays">
-        <item>  </item>
+        <item> Select </item>
         <item> AFGHANISTAN </item>
         <item> ALBANIA </item>
         <item> ALGERIA </item>
@@ -301,5 +301,7 @@
         <item> ZAMBIA </item>
         <item> ZIMBABWE </item>
     </string-array>
+
+    <string name="txt">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, accusantium ad alias animi atque corporis cum doloremque laboriosam maiores molestias natus nesciunt porro quae, quaerat repellat vero vitae voluptatibus voluptatum.</string>
 
 </resources>
