@@ -21,10 +21,6 @@ public class BuySubmitFragment extends Fragment {
         // change action bar text
         getActivity().setTitle("Buy Currency");
 
-        // set description
-        TextView buyDescriptionId = (TextView) view.findViewById(R.id.buyDescriptionId);
-        buyDescriptionId.setText("Dynamic Label");
-
         // active back button
         Button backButton = (Button) view.findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {

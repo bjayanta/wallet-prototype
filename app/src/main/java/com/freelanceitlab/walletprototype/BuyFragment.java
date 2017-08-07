@@ -18,6 +18,16 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+
+import helpers.BuyRESTOperation;
+
 public class BuyFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private String[] sendGatewayItems;
@@ -33,7 +43,7 @@ public class BuyFragment extends Fragment implements AdapterView.OnItemSelectedL
         getActivity().setTitle("Buy Currency");
 
         // target the send spinner
-        Spinner sendGatewayId = (Spinner) view.findViewById(R.id.sendGatewayId);
+        Spinner sendGatewayId = (Spinner) view.findViewById(R.id.sendSpinner);
         Spinner receiveGatewayId = (Spinner) view.findViewById(R.id.receiveGatewayId);
 
         // get all the list array
@@ -73,8 +83,19 @@ public class BuyFragment extends Fragment implements AdapterView.OnItemSelectedL
         sendGatewayId.setOnItemSelectedListener(this);
         receiveGatewayId.setOnItemSelectedListener(this);
 
-        // log the userdata
-        Log.v("USERDATA", setUserdata());
+        BuyRESTOperation buyRESTOperation = new BuyRESTOperation();
+        JSONObject resultObject = null;
+        try {
+            resultObject = new JSONObject(buyRESTOperation.getSendMethods());
+            if(resultObject.length() > 0) {
+                // code goes to here
+                Log.v("Send-methods", buyRESTOperation.getSendMethods());
+                Toast.makeText(getContext(), buyRESTOperation.getSendMethods(), Toast.LENGTH_LONG).show();
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         return view;
     }
