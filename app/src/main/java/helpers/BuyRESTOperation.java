@@ -15,18 +15,46 @@ import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Jayanta on 8/7/2017.
+ *
  */
 
 public class BuyRESTOperation {
 
     private String dataset;
 
+    // api meta variable
+    String apiURL;
+    String apiKey;
+
+    public BuyRESTOperation(String url, String key) {
+        this.apiURL = url;
+        this.apiKey = key;
+    }
+
+    /**
+     *
+     * @return
+     */
     public String getSendMethods() {
         connection("POST", "getSendMethods", null);
-
         return dataset;
     }
 
+    /**
+     *
+     * @return
+     */
+    public String getReceiveMethods() {
+        connection("POST", "getReceiveMethods", null);
+        return dataset;
+    }
+
+    /**
+     *
+     * @param method
+     * @param segment
+     * @param data
+     */
     private void connection(final String method, final String segment, final String data) {
 
         try {
@@ -50,12 +78,19 @@ public class BuyRESTOperation {
 
     }
 
+    /**
+     *
+     * @param method
+     * @param segment
+     * @param data
+     * @return
+     */
     private String getResponse(String method, String segment, String data) {
         // initialize StringBuilder
         StringBuilder responseOutput    = new StringBuilder();
 
         // set default url
-        String apiurl                   = "http://dbsewallet.com/api/buyapi/" + segment;
+        String apiurl                   = apiURL + "buyapi/" + segment;
 
         // set default variables
         String line                     = null;

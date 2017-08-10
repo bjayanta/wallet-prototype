@@ -2,6 +2,10 @@
     <string name="app_name">Wallet Prototype</string>
     <string name="app_logo">Company Logo</string>
 
+    <!-- api details -->
+    <string name="apiURL">https://dbsewallet.com/api/</string>
+    <string name="apiKey">db5d8d6959ccb6288afffa1b018631f5</string>
+
     <!-- button -->
     <string name="btn_signup">Create Account</string>
     <string name="btn_signin">Sign In</string>

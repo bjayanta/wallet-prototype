@@ -43,6 +43,10 @@ public class SignupFragment extends Fragment {
     Spinner country;
     String dataset;
 
+    // api meta variable
+    String apiURL;
+    String apiKey;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -175,14 +179,17 @@ public class SignupFragment extends Fragment {
     }
 
     private String getServerResponse() {
-        String key = "db5d8d6959ccb6288afffa1b018631f5";
+        // set api meta data
+        apiURL = getString(R.string.apiURL) + "registration/signup?";
+        apiKey = getString(R.string.apiKey);
+
         String output = null;
         String response = null;
 
         URL url = null;
 
         try {
-            url = new URL("http://dbsewallet.com/api/permission/signup?key=" + key);
+            url = new URL(apiURL + "key=" + apiKey);
             String urlParameters = "details="  + URLEncoder.encode(dataset.toString(), "UTF-8");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
@@ -222,6 +229,7 @@ public class SignupFragment extends Fragment {
         }
 
         // Log.v("response", output);
+
         // return output;
         return response;
     }

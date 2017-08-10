@@ -24,14 +24,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import helpers.BuyRESTOperation;
+import helpers.PairCls;
 
 public class BuyFragment extends Fragment implements AdapterView.OnItemSelectedListener {
-
-    private String[] sendGatewayItems;
-    private String[] receiveGatewayItems;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,30 +42,95 @@ public class BuyFragment extends Fragment implements AdapterView.OnItemSelectedL
         // change action bar text
         getActivity().setTitle("Buy Currency");
 
+        // set api meta data
+        String apiURL = getString(R.string.apiURL);
+        String apiKey = getString(R.string.apiKey);
+
         // target the send spinner
-        Spinner sendGatewayId = (Spinner) view.findViewById(R.id.sendSpinner);
-        Spinner receiveGatewayId = (Spinner) view.findViewById(R.id.receiveGatewayId);
+        Spinner sendGatewayId       = (Spinner) view.findViewById(R.id.sendSpinner);
+        Spinner receiveGatewayId    = (Spinner) view.findViewById(R.id.receiveGatewayId);
 
-        // get all the list array
-        sendGatewayItems = getResources().getStringArray(R.array.bdGateway);
-        receiveGatewayItems = getResources().getStringArray(R.array.foreignGateway);
+        BuyRESTOperation buyRESTOperation   = new BuyRESTOperation(apiURL, apiKey);
+        JSONObject resultObject             = null;
 
-        // initialize the array-adapter
-        ArrayAdapter<String> bdGatewayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, sendGatewayItems);
-        // set the array-adapter
-        bdGatewayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sendGatewayId.setAdapter(bdGatewayAdapter);
+        // Send Gateway
+        try {
+            String response     = buyRESTOperation.getSendMethods();
+            resultObject        = new JSONObject(response);
 
-        // initialize the array-adapter
-        ArrayAdapter<String> foreignGatewayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, receiveGatewayItems);
-        // set the array-adapter
-        foreignGatewayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        receiveGatewayId.setAdapter(foreignGatewayAdapter);
+            if(resultObject.length() > 0) {
+                Iterator<?> keys            = resultObject.keys();
+                ArrayList<PairCls> parList  = new ArrayList<>();
+
+                while(keys.hasNext() ) {
+                    String key = (String) keys.next();
+                    parList.add(new PairCls(key, resultObject.getString(key)));
+                }
+
+                // Setup Spinner configuration
+                ArrayAdapter<PairCls> adapter = new ArrayAdapter<PairCls>(getContext(), android.R.layout.simple_spinner_dropdown_item, parList);
+                sendGatewayId.setAdapter(adapter);
+                // sendGatewayId.setSelection(adapter.getPosition(myItem)); // Optional
+
+                // sendGatewayId.setOnItemSelectedListener(this);
+                sendGatewayId.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        PairCls pairCls = (PairCls) parent.getSelectedItem();
+                        Toast.makeText(getContext(), "Key: " + pairCls.getId() + ",  Value : " + pairCls.getName(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {}
+                });
+
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        // receive Gateway
+        try {
+            String response     = buyRESTOperation.getReceiveMethods();
+            resultObject        = new JSONObject(response);
+
+            if(resultObject.length() > 0) {
+                Iterator<?> keys                    = resultObject.keys();
+                ArrayList<PairCls> receivePairList  = new ArrayList<>();
+
+                while(keys.hasNext() ) {
+                    String key = (String) keys.next();
+                    receivePairList.add(new PairCls(key, resultObject.getString(key)));
+                }
+
+                // Setup Spinner configuration
+                ArrayAdapter<PairCls> adapter = new ArrayAdapter<PairCls>(getContext(), android.R.layout.simple_spinner_dropdown_item, receivePairList);
+                receiveGatewayId.setAdapter(adapter);
+                // receiveGatewayId.setSelection(adapter.getPosition(myItem)); // Optional
+
+                // receiveGatewayId.setOnItemSelectedListener(this);
+                receiveGatewayId.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        PairCls receivePairCls = (PairCls) parent.getSelectedItem();
+                        Toast.makeText(getContext(), "Key: " + receivePairCls.getId() + ",  Value : " + receivePairCls.getName(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {}
+                });
+
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         // active readonly mode the BDT amount
         EditText sendAmountId = (EditText) view.findViewById(R.id.sendAmountId);
         sendAmountId.setEnabled(false);
-        sendAmountId.setText("500.00");
+        sendAmountId.setText("0.00");
 
         // active the next button
         Button nextBtn = (Button) view.findViewById(R.id.nextButtonId);
@@ -80,28 +145,14 @@ public class BuyFragment extends Fragment implements AdapterView.OnItemSelectedL
             }
         });
 
-        sendGatewayId.setOnItemSelectedListener(this);
-        receiveGatewayId.setOnItemSelectedListener(this);
-
-        BuyRESTOperation buyRESTOperation = new BuyRESTOperation();
-        JSONObject resultObject = null;
-        try {
-            resultObject = new JSONObject(buyRESTOperation.getSendMethods());
-            if(resultObject.length() > 0) {
-                // code goes to here
-                Log.v("Send-methods", buyRESTOperation.getSendMethods());
-                Toast.makeText(getContext(), buyRESTOperation.getSendMethods(), Toast.LENGTH_LONG).show();
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
         return view;
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        // PairCls pairCls = (PairCls) parent.getSelectedItem();
+        // Toast.makeText(getContext(), "Key: " + pairCls.getId() + ",  Value : " + pairCls.getName(), Toast.LENGTH_SHORT).show();
+
         String itemSelected = parent.getItemAtPosition(position).toString();
         Toast.makeText(getContext(), itemSelected, Toast.LENGTH_SHORT).show();
     }
@@ -111,10 +162,5 @@ public class BuyFragment extends Fragment implements AdapterView.OnItemSelectedL
 
     }
 
-    private String setUserdata() {
-        SharedPreferences appdata = getActivity().getSharedPreferences("Appdata", Context.MODE_PRIVATE);
-        String data = appdata.getString("userdata", "");
 
-        return data;
-    }
 }

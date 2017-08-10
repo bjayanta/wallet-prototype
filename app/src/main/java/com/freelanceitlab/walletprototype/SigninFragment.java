@@ -34,11 +34,12 @@ public class SigninFragment extends Fragment {
     String username;
     String password;
 
-    public String resultset;
+    // api meta variable
+    String apiURL;
+    String apiKey;
 
-    // app key
-    String appKey = "db5d8d6959ccb6288afffa1b018631f5";
-    String strUrl;
+    // initialize response variable
+    public String resultset;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,6 +49,10 @@ public class SigninFragment extends Fragment {
 
         final EditText usernameEditText = (EditText) view.findViewById(R.id.username);
         final EditText passwordEditText = (EditText) view.findViewById(R.id.password);
+
+        // set api meta data
+        apiURL = getString(R.string.apiURL) + "authentication/signin?";
+        apiKey = getString(R.string.apiKey);
 
         final Button signinBtn = (Button) view.findViewById(R.id.signinBtn);
         signinBtn.setOnClickListener(new View.OnClickListener(){
@@ -66,8 +71,11 @@ public class SigninFragment extends Fragment {
                             passwordEditText.setError("Password is required!");
                         } else {
                             // get the user data from server
-                            strUrl = "http://dbsewallet.com/api/permission/getAppInfo?key=" + appKey + "&user=" + username + "&pass=" + password;
-                            new RESTOperation().execute(strUrl);
+                            apiURL += "key=" + apiKey;
+                            apiURL += "&user=" + username;
+                            apiURL += "&pass=" + password;
+
+                            new RESTOperation().execute(apiURL);
                         }
                     }
                 } else {
@@ -164,6 +172,7 @@ public class SigninFragment extends Fragment {
 
                 BufferedReader bf = new BufferedReader(new InputStreamReader(con.getInputStream()));
                 resultset = bf.readLine();
+                Log.v("abc", params[0]);
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
