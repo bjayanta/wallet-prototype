@@ -1,14 +1,12 @@
 package com.freelanceitlab.walletprototype;
 
-
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -22,16 +20,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 import helpers.BuyRESTOperation;
+import helpers.FormatDataAsJson;
 import helpers.PairCls;
 
 public class BuyFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+
+    public String[] ingredients = new String[3];
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,7 +74,9 @@ public class BuyFragment extends Fragment implements AdapterView.OnItemSelectedL
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         PairCls pairCls = (PairCls) parent.getSelectedItem();
-                        Toast.makeText(getContext(), "Key: " + pairCls.getId() + ",  Value : " + pairCls.getName(), Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(getContext(), "Key: " + pairCls.getId() + ",  Value : " + pairCls.getName(), Toast.LENGTH_SHORT).show();
+
+                        ingredients[0] = pairCls.getId();
                     }
 
                     @Override
@@ -92,7 +91,7 @@ public class BuyFragment extends Fragment implements AdapterView.OnItemSelectedL
 
         // receive Gateway
         try {
-            String response     = buyRESTOperation.getReceiveMethods();
+            final String response     = buyRESTOperation.getReceiveMethods();
             resultObject        = new JSONObject(response);
 
             if(resultObject.length() > 0) {
@@ -114,7 +113,9 @@ public class BuyFragment extends Fragment implements AdapterView.OnItemSelectedL
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         PairCls receivePairCls = (PairCls) parent.getSelectedItem();
-                        Toast.makeText(getContext(), "Key: " + receivePairCls.getId() + ",  Value : " + receivePairCls.getName(), Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(getContext(), "Key: " + receivePairCls.getId() + ",  Value : " + receivePairCls.getName(), Toast.LENGTH_SHORT).show();
+
+                        ingredients[1] = receivePairCls.getId();
                     }
 
                     @Override
@@ -128,9 +129,53 @@ public class BuyFragment extends Fragment implements AdapterView.OnItemSelectedL
         }
 
         // active readonly mode the BDT amount
+        EditText receiveAmountId = (EditText) view.findViewById(R.id.receiveAmountId);
+        receiveAmountId.setText("1.00");
+
+        ingredients[2] = "1.00";
+
+        // get the buy rate
+        Button showBtn = (Button) view.findViewById(R.id.showButtonID);
+        showBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // get data from
+                FormatDataAsJson formatDataAsJson = new FormatDataAsJson(new String[]{"send", "receive", "amount"}, ingredients);
+                Log.v("Ingredients", formatDataAsJson.format());
+
+                // BuyRESTOperation buyRESTOperation   = new BuyRESTOperation(apiURL, apiKey);
+                // final String response     = buyRESTOperation.getReceiveMethods();
+                // resultObject        = new JSONObject(response);
+            }
+        });
+
+        // active readonly mode the BDT amount
         EditText sendAmountId = (EditText) view.findViewById(R.id.sendAmountId);
         sendAmountId.setEnabled(false);
         sendAmountId.setText("0.00");
+
+        /*
+        // text change event
+        receiveAmountId.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                Toast.makeText(getContext(), "After Text Changed", Toast.LENGTH_LONG).show();
+
+                FormatDataAsJson formatDataAsJson = new FormatDataAsJson(new String[]{"send", "receive", "amount"}, ingredients);
+                Log.v("Ingredients", formatDataAsJson.format());
+            }
+        });
+        */
 
         // active the next button
         Button nextBtn = (Button) view.findViewById(R.id.nextButtonId);

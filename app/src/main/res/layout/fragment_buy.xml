@@ -81,20 +81,33 @@
         android:layout_marginTop="24dp"
         app:layout_constraintTop_toBottomOf="@+id/receiveGatewayId" />
 
-    <EditText
-        android:id="@+id/sendAmountId"
+    <Button
+        android:id="@+id/showButtonID"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        android:hint="@string/sendAmountHint"
+        android:text="@string/btn_show"
         android:layout_marginRight="16dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/receiveAmountId"
+        app:layout_constraintHorizontal_bias="0.0" />
+
+    <EditText
+        android:id="@+id/sendAmountId"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginTop="24dp"
-        app:layout_constraintTop_toBottomOf="@+id/receiveAmountId" />
+        android:ems="10"
+        android:hint="@string/sendAmountHint"
+        android:inputType="numberDecimal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/showButtonID"
+        app:layout_constraintHorizontal_bias="0.0" />
 
     <Button
         android:id="@+id/nextButtonId"

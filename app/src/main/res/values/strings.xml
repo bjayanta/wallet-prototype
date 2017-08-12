@@ -9,6 +9,7 @@
     <!-- button -->
     <string name="btn_signup">Create Account</string>
     <string name="btn_signin">Sign In</string>
+    <string name="btn_show">Show</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <!-- Label Information -->
@@ -32,8 +33,8 @@
 
     <!-- Buy Information -->
     <string name="buyFragmentLabelTxt">Buy Currency</string>
-    <string name="sendLabelTxt">Send Money (TK)</string>
-    <string name="receiveLabelTxt">Receive Money </string>
+    <string name="sendLabelTxt">Send Method </string>
+    <string name="receiveLabelTxt">Receive Method </string>
     <string name="receiveAmountHint">USD Amount </string>
     <string name="sendAmountHint">BDT Amount </string>
     <string name="placeholder">Type Here </string>
