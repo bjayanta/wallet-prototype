@@ -21,6 +21,7 @@ import java.util.concurrent.ExecutionException;
 public class BuyRESTOperation {
 
     private String dataset;
+    double amount = 0.00;
 
     // api meta variable
     String apiURL;
@@ -46,6 +47,15 @@ public class BuyRESTOperation {
      */
     public String getReceiveMethods() {
         connection("POST", "getReceiveMethods", null);
+        return dataset;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getAmount(String formatDataAsJson) {
+        connection("POST", "calculateRate", formatDataAsJson);
         return dataset;
     }
 

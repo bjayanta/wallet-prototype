@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +69,12 @@ public class LandingFragment extends Fragment {
                 String description = attentionObj.getString("description");
 
                 TextView attentionDescription = (TextView) view.findViewById(R.id.attentionDescription);
-                attentionDescription.setText(description);
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                    attentionDescription.setText(Html.fromHtml(description, Html.FROM_HTML_MODE_LEGACY));
+                } else {
+                    attentionDescription.setText(Html.fromHtml(description));
+                }
+
             }
         } catch (JSONException e) {
             e.printStackTrace();
