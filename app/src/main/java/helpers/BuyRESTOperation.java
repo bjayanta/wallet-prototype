@@ -59,6 +59,16 @@ public class BuyRESTOperation {
         return dataset;
     }
 
+    /**
+     *
+     * @param send
+     * @return
+     */
+    public String save(String send) {
+        connection("POST", "save", send);
+        return dataset;
+    }
+
 
 
     /**

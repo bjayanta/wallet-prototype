@@ -44,7 +44,7 @@
                 android:layout_marginRight="16dp" />
 
             <LinearLayout
-                android:id="@+id/viwGroupID"
+                android:id="@+id/viewsContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/sendAddressInputId"
@@ -79,7 +79,7 @@
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="24dp"
                 android:textStyle="bold"
-                android:layout_below="@+id/viwGroupID"/>
+                android:layout_below="@+id/viewsContainer"/>
 
             <EditText
                 android:id="@+id/indentifireInputId"
