@@ -97,6 +97,10 @@ public class DashboardActivity extends AppCompatActivity
         } else if (id == R.id.nav_sale) {
 
         } else if (id == R.id.nav_exchange) {
+            ExchangeFragment exchangeFragment = new ExchangeFragment();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.dashboard_container, exchangeFragment);
+            ft.commit();
 
         } else if (id == R.id.nav_signout) {
             Intent homescreen = new Intent(getApplicationContext(), Homescreen.class);

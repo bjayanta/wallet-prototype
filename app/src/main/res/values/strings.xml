@@ -309,4 +309,5 @@
 
     <string name="txt">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, accusantium ad alias animi atque corporis cum doloremque laboriosam maiores molestias natus nesciunt porro quae, quaerat repellat vero vitae voluptatibus voluptatum.</string>
 
+    <string name="zeroWithPoint">0.00</string>
 </resources>

@@ -1,0 +1,95 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.freelanceitlab.walletprototype.ExchangeFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:id="@+id/exchangeLanding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/sendMethodLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:text="@string/sendLabelTxt" />
+
+        <Spinner
+            android:id="@+id/sendMethodSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/sendMethodLabel"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp" />
+
+        <TextView
+            android:id="@+id/receiveMethodLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sendMethodSpinner"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:text="@string/receiveLabelTxt"/>
+
+        <Spinner
+            android:id="@+id/receiveMethodSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/receiveMethodLabel"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp" />
+
+        <EditText
+            android:id="@+id/sendAmountId"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:inputType="number"
+            android:hint="@string/sendAmountHint"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_below="@+id/receiveMethodSpinner" />
+
+        <Button
+            android:id="@+id/showButtonId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_show"
+            android:layout_below="@+id/sendAmountId"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp" />
+
+        <EditText
+            android:id="@+id/receiveAmountId"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="@string/zeroWithPoint"
+            android:inputType="none"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/showButtonId" />
+
+        <Button
+            android:id="@+id/nextButtonId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/nextButtonTxt"
+            android:layout_below="@+id/receiveAmountId"
+            android:layout_marginTop="80dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="24dp"/>
+
+    </RelativeLayout>
+</ScrollView>
