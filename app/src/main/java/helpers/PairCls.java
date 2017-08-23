@@ -14,7 +14,6 @@ public class PairCls {
         this.name = name;
     }
 
-
     public String getId() {
         return id;
     }
@@ -31,7 +30,6 @@ public class PairCls {
         this.name = name;
     }
 
-
     //to display object as a string in spinner
     @Override
     public String toString() {
@@ -40,9 +38,9 @@ public class PairCls {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof PairCls){
+        if(obj instanceof PairCls) {
             PairCls c = (PairCls)obj;
-            if(c.getName().equals(name) && c.getId()==id ) return true;
+            if(c.getName().equals(name) && c.getId() == id ) return true;
         }
 
         return false;

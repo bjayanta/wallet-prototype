@@ -152,8 +152,9 @@ public class BuyFragment extends Fragment implements AdapterView.OnItemSelectedL
 
         // active readonly mode the BDT amount
         sendAmountId = (EditText) view.findViewById(R.id.sendAmountId);
-        sendAmountId.setEnabled(false);
         sendAmountId.setText("0.00");
+        sendAmountId.setEnabled(false);
+        sendAmountId.setFocusable(false);
 
         // get the buy rate
         Button showBtn = (Button) view.findViewById(R.id.showButtonID);
