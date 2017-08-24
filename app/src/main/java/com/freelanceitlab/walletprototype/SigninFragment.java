@@ -1,6 +1,7 @@
 package com.freelanceitlab.walletprototype;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -40,6 +41,8 @@ public class SigninFragment extends Fragment {
 
     // initialize response variable
     public String resultset;
+
+    ProgressDialog preloader;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -122,42 +125,53 @@ public class SigninFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+
+            // Define and call the onPreExecute method for the preloader
+            preloader = new ProgressDialog(getActivity());
+            preloader.setTitle("Authentication Process Running !");
+            preloader.setMessage("Please wait...");
+            preloader.setCancelable(false);
+            preloader.show();
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            try {
-                JSONObject object = new JSONObject(s);
+            if (preloader.isShowing()) {
+                try {
+                    JSONObject object = new JSONObject(s);
 
-                if(object != null) {
-                    // get the permission
-                    int permission = Integer.parseInt(object.getString("permission"));
-                    int error = Integer.parseInt(object.getString("error"));
-                    String description = object.getString("description");
+                    if (object != null) {
+                        // get the permission
+                        int permission = Integer.parseInt(object.getString("permission"));
+                        int error = Integer.parseInt(object.getString("error"));
+                        String description = object.getString("description");
 
-                    if (permission == 1 && error == 0) {
-                        // set the user data
-                        String data = object.getString("userinfo");
-                        setUserdata(data);
+                        if (permission == 1 && error == 0) {
+                            // set the user data
+                            String data = object.getString("userinfo");
+                            setUserdata(data);
 
-                        // set notice data
-                        String notice = object.getString("notice");
-                        setNoticedata(notice);
+                            // set notice data
+                            String notice = object.getString("notice");
+                            setNoticedata(notice);
 
-                        // run dashboard activity
-                        Intent dashboardIntent = new Intent(getContext(), DashboardActivity.class);
-                        startActivity(dashboardIntent);
+                            // run dashboard activity
+                            Intent dashboardIntent = new Intent(getContext(), DashboardActivity.class);
+                            startActivity(dashboardIntent);
 
-                        // kill the current activity
-                        getActivity().finish();
-                    } else {
-                        Toast.makeText(getContext(), description, Toast.LENGTH_LONG).show();
+                            // kill the current activity
+                            getActivity().finish();
+                        } else {
+                            Toast.makeText(getContext(), description, Toast.LENGTH_LONG).show();
+                        }
                     }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
+
+                preloader.dismiss();
             }
         }
 

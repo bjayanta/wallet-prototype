@@ -56,8 +56,23 @@ public class ExchangeRestOperation {
         return dataset;
     }
 
+    /**
+     *
+     * @param formatDataAsJson
+     * @return
+     */
     public String getAmount(String formatDataAsJson) {
         connection("POST", "calculateRate", formatDataAsJson);
+        return dataset;
+    }
+
+    /**
+     *
+     * @param send
+     * @return
+     */
+    public String save(String send) {
+        connection("POST", "save", send);
         return dataset;
     }
 

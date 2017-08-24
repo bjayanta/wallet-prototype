@@ -37,6 +37,9 @@ public class BuyFragment extends Fragment implements AdapterView.OnItemSelectedL
     // public String[] emit = new String[3];
     HashMap<String, String> emit = new HashMap<String, String>();
 
+    Button showBtn;
+    Button nextBtn;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -156,37 +159,49 @@ public class BuyFragment extends Fragment implements AdapterView.OnItemSelectedL
         sendAmountId.setEnabled(false);
         sendAmountId.setFocusable(false);
 
+        showBtn = (Button) view.findViewById(R.id.showButtonID);
+        nextBtn = (Button) view.findViewById(R.id.nextButtonId);
+
         // get the buy rate
-        Button showBtn = (Button) view.findViewById(R.id.showButtonID);
         showBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ingredients[2] = String.valueOf(receiveAmountId.getText());
-                emit.put("receive_amount", String.valueOf(receiveAmountId.getText()));
+                // check the send amount
+                double receiveAmount = Double.parseDouble(String.valueOf(receiveAmountId.getText()));
+                int retval = Double.compare(receiveAmount, 0.00);
 
-                // get data from
-                FormatDataAsJson formatDataAsJson = new FormatDataAsJson(new String[]{"send", "receive", "amount"}, ingredients);
+                if (retval > 0) {
+                    ingredients[2] = String.valueOf(receiveAmountId.getText());
+                    emit.put("receive_amount", String.valueOf(receiveAmountId.getText()));
 
-                BuyRESTOperation buyRESTOperation   = new BuyRESTOperation(apiURL, apiKey);
-                final String response = buyRESTOperation.getAmount(formatDataAsJson.format());
-                try {
-                    JSONObject resultObject = new JSONObject(response);
-                    sendAmountId.setText(resultObject.getString("send_amount"));
+                    // get data from
+                    FormatDataAsJson formatDataAsJson = new FormatDataAsJson(new String[]{"send", "receive", "amount"}, ingredients);
 
-                    emit.put("send_amount", resultObject.getString("send_amount"));
-                    emit.put("buy_info", resultObject.getString("send_methodInfo"));
-                    emit.put("send_label", resultObject.getString("send_placeholder"));
-                    emit.put("trx_label", resultObject.getString("send_TrxPlaceholder"));
-                    emit.put("receive_label", resultObject.getString("receive_placeholder"));
+                    BuyRESTOperation buyRESTOperation = new BuyRESTOperation(apiURL, apiKey);
+                    final String response = buyRESTOperation.getAmount(formatDataAsJson.format());
+                    try {
+                        JSONObject resultObject = new JSONObject(response);
+                        sendAmountId.setText(resultObject.getString("send_amount"));
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                        emit.put("send_amount", resultObject.getString("send_amount"));
+                        emit.put("buy_info", resultObject.getString("send_methodInfo"));
+                        emit.put("send_label", resultObject.getString("send_placeholder"));
+                        emit.put("trx_label", resultObject.getString("send_TrxPlaceholder"));
+                        emit.put("receive_label", resultObject.getString("receive_placeholder"));
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    nextBtn.setEnabled(true);
+                } else {
+                    Toast.makeText(getContext(), "Send amount at least 1.00", Toast.LENGTH_LONG).show();
+                    nextBtn.setEnabled(false);
                 }
             }
         });
 
         // active the next button
-        Button nextBtn = (Button) view.findViewById(R.id.nextButtonId);
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

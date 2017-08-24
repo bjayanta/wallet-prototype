@@ -42,6 +42,9 @@ public class ExchangeFragment extends Fragment implements AdapterView.OnItemSele
     EditText sendAmountField;
     EditText receiveAmountField;
 
+    Button showButton;
+    Button nextBtn;
+
     public ExchangeFragment() {
         // Required empty public constructor
     }
@@ -51,6 +54,9 @@ public class ExchangeFragment extends Fragment implements AdapterView.OnItemSele
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_exchange, container, false);
+
+        // change action bar text
+        getActivity().setTitle("Exchange Currency");
 
         // set api meta data
         apiURL = getString(R.string.apiURL);
@@ -92,7 +98,7 @@ public class ExchangeFragment extends Fragment implements AdapterView.OnItemSele
                         String key = pairCls.getId();
                         String value = pairCls.getName();
 
-                        Toast.makeText(getContext(), "Key: " + key + ",  Value : " + value, Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(getContext(), "Key: " + key + ",  Value : " + value, Toast.LENGTH_SHORT).show();
 
                         ingredients[0] = pairCls.getId();
                         emit.put("send_method", pairCls.getId());
@@ -105,7 +111,7 @@ public class ExchangeFragment extends Fragment implements AdapterView.OnItemSele
                         String key = pairCls.getId();
                         String value = pairCls.getName();
 
-                        Toast.makeText(getContext(), "Key: " + key + ",  Value : " + value, Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(getContext(), "Key: " + key + ",  Value : " + value, Toast.LENGTH_SHORT).show();
 
                         ingredients[0] = pairCls.getId();
                         emit.put("send_method", pairCls.getId());
@@ -146,7 +152,7 @@ public class ExchangeFragment extends Fragment implements AdapterView.OnItemSele
                         String key = pairCls.getId();
                         String value = pairCls.getName();
 
-                        Toast.makeText(getContext(), "Key: " + key + ",  Value : " + value, Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(getContext(), "Key: " + key + ",  Value : " + value, Toast.LENGTH_SHORT).show();
 
                         ingredients[1] = pairCls.getId();
                         emit.put("receive_method", pairCls.getId());
@@ -159,7 +165,7 @@ public class ExchangeFragment extends Fragment implements AdapterView.OnItemSele
                         String key = pairCls.getId();
                         String value = pairCls.getName();
 
-                        Toast.makeText(getContext(), "Key: " + key + ",  Value : " + value, Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(getContext(), "Key: " + key + ",  Value : " + value, Toast.LENGTH_SHORT).show();
 
                         ingredients[1] = pairCls.getId();
                         emit.put("receive_method", pairCls.getId());
@@ -180,40 +186,53 @@ public class ExchangeFragment extends Fragment implements AdapterView.OnItemSele
         receiveAmountField.setEnabled(false);
         receiveAmountField.setFocusable(false);
 
-        Button showButton = (Button) view.findViewById(R.id.showButtonId);
+        showButton = (Button) view.findViewById(R.id.showButtonId);
+        nextBtn = (Button) view.findViewById(R.id.nextButtonId);
+
+        // show button
         showButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ingredients[2] = String.valueOf(sendAmountField.getText());
-                emit.put("send_amount", String.valueOf(sendAmountField.getText()));
-                emit.put("receive_amount", String.valueOf(receiveAmountField.getText()));
+                // check the send amount
+                double sendAmount = Double.parseDouble(String.valueOf(sendAmountField.getText()));
+                int retval = Double.compare(sendAmount, 0.00);
 
-                // get data from
-                FormatDataAsJson formatDataAsJson = new FormatDataAsJson(new String[]{"send", "receive", "amount"}, ingredients);
+                if (retval > 0) {
+                    ingredients[2] = String.valueOf(sendAmountField.getText());
+                    emit.put("send_amount", String.valueOf(sendAmountField.getText()));
 
-                // rest api class
-                ExchangeRestOperation exchangeRestOperation = new ExchangeRestOperation(apiURL, apiKey);
-                final String response = exchangeRestOperation.getAmount(formatDataAsJson.format());
+                    // get data from
+                    FormatDataAsJson formatDataAsJson = new FormatDataAsJson(new String[]{"send", "receive", "amount"}, ingredients);
 
-                Log.v("Response", response);
+                    // rest api class
+                    ExchangeRestOperation exchangeRestOperation = new ExchangeRestOperation(apiURL, apiKey);
+                    final String response = exchangeRestOperation.getAmount(formatDataAsJson.format());
 
-                try {
-                    JSONObject resultObject = new JSONObject(response);
+                    Log.v("Response", response);
 
-                    receiveAmountField.setText(resultObject.getString("receive_amount"));
+                    try {
+                        JSONObject resultObject = new JSONObject(response);
 
-                    emit.put("send_methodInfo", resultObject.getString("send_methodInfo"));
-                    emit.put("send_level", resultObject.getString("send_level"));
-                    emit.put("receive_level", resultObject.getString("receive_level"));
+                        receiveAmountField.setText(resultObject.getString("receive_amount"));
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                        emit.put("receive_amount", resultObject.getString("receive_amount"));
+                        emit.put("send_methodInfo", resultObject.getString("send_methodInfo"));
+                        emit.put("send_level", resultObject.getString("send_level"));
+                        emit.put("receive_level", resultObject.getString("receive_level"));
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    nextBtn.setEnabled(true);
+                } else {
+                    Toast.makeText(getContext(), "Send amount at least 1.00", Toast.LENGTH_LONG).show();
+                    nextBtn.setEnabled(false);
                 }
             }
         });
 
         // next page
-        Button nextBtn = (Button) view.findViewById(R.id.nextButtonId);
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -233,6 +252,7 @@ public class ExchangeFragment extends Fragment implements AdapterView.OnItemSele
                 ft.commit();
 
                 // Toast.makeText(getContext(), "Hello World!", Toast.LENGTH_LONG).show();
+                Log.v("DATA", emit.toString());
             }
         });
 
